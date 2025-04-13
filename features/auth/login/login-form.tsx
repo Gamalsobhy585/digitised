@@ -86,7 +86,7 @@ export function LoginForm({
     >
       <Card className="z-50 rounded-3xl py-6">
         <CardHeader className="items-center">
-          <Image src="/logo.webp" alt="logo" width={100} height={100} />
+          <Image src="/logo.png" alt="logo" width={100} height={100} />
           <CardTitle className="text-2xl">{t("login")}</CardTitle>
           <CardDescription>{t("welcome")}</CardDescription>
         </CardHeader>

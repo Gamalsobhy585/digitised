@@ -7,7 +7,7 @@ function Login() {
   return (
     <main className="relative h-screen w-full bg-primary flex justify-center items-center px-6 md:px-12">
       <Image
-        src="/logo.png"
+        src="/bg.png"
         alt="bg"
         width={1000}
         height={1000}
