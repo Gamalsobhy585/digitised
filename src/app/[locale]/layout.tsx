@@ -17,9 +17,9 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "Spider",
+  title: "Digitised",
   description:
-    "Spider is a premier e-commerce platform offering a wide range of products from various merchants. Discover unique styles and high-quality items tailored to your needs.",
+    "Digitised is a test assessment for digitised company.",
 };
 
 export default async function RootLayout({
@@ -29,7 +29,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }

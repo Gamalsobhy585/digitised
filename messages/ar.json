@@ -12,6 +12,9 @@
     "action": "الاحداث",
     "logout_success_toast": "تم تسجيل الخروج بنجاح.",
   "Auth": {
+    "pass_placeholder": "أدخل كلمة المرور الخاصة بك",
+    "register_title": "التسجيل",
+    "register_description": "سجّل الآن",
     "login": "تسجيل الدخول",
     "welcome": "مرحبًا!",
     "email_label": "البريد الإلكتروني",

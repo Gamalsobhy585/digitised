@@ -40,7 +40,6 @@ export function LoginForm({
   const router = useRouter();
   const { setIsAuthenticated } = useAuth();
   const searchParams = useSearchParams();
-  const isProvider = searchParams.get("role") === "provider";
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -117,6 +116,7 @@ export function LoginForm({
                 <div className="grid gap-2">
                   <FormField
                     name="password"
+                    
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
@@ -125,17 +125,14 @@ export function LoginForm({
                           <Input
                             id="password"
                             type="password"
+                            placeholder={t("pass_placeholder")}
+
                             required
                             {...field}
                           />
                         </FormControl>
                         <FormMessage />
-                        <Link
-                          href="/forget-password"
-                          className="text-primary block w-full text-end text-sm"
-                        >
-                          {t("forgot_password")}
-                        </Link>
+                       
                       </FormItem>
                     )}
                   />
@@ -148,13 +145,9 @@ export function LoginForm({
                   {t("submit_button")}
                 </Button>
 
-                {!isProvider && (
+               
                   <>
-                    <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                      <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                        {t("or_continue_with")}
-                      </span>
-                    </div>
+                  
                    
                     <p className="text-center">
                       {t("register_prompt")}{" "}
@@ -163,7 +156,7 @@ export function LoginForm({
                       </Link>
                     </p>
                   </>
-                )}
+               
               </div>
             </form>
           </Form>

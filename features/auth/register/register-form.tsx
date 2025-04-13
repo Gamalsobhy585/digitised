@@ -73,7 +73,7 @@ export function RegisterForm({
     >
       <Card className="z-50 rounded-2xl">
         <CardHeader className="items-center">
-          <Image src="/logo.webp" alt="logo" width={100} height={100} />
+          <Image src="/logo.png" alt="logo" width={100} height={100} />
           <CardTitle className="text-2xl">{t("register_title")}</CardTitle>
           <CardDescription>{t("register_description")}</CardDescription>
         </CardHeader>
@@ -133,6 +133,7 @@ export function RegisterForm({
                           <Input
                             id="password"
                             type="password"
+                            placeholder={t("pass_placeholder")}
                             required
                             {...field}
                           />
@@ -149,11 +150,7 @@ export function RegisterForm({
                 >
                   {t("register_button")}
                 </Button>
-                <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                  <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                    {t("continue_with")}
-                  </span>
-                </div>
+               
                
                 <p className="text-center">
                   {t("already_have_account")}{" "}

@@ -16,6 +16,12 @@
         "welcome": "Welcome!",
         "email_label": "Email",
         "email_placeholder": "example@m.com",
+        
+        "pass_placeholder":"Enter Your Password ",
+        "register_title":"Registeration",
+        "register_description":"Register Now",
+
+
         "password_label": "Password",
         "forgot_password": "Forgot password?",
         "submit_button": "Login",
