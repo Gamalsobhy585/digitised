@@ -1,0 +1,48 @@
+{
+    "loading": "جار التحميل...",
+    "noResults": "لا توجد نتائج.",
+    "error": "حدث خطأ.",
+    "pagination": {
+    "previous": "السابق",
+    "next": "التالي"
+    },
+    "home": "الرئيسية",
+    "password": "كلمة المرور",
+    "log_out": "تسجيل الخروج",
+    "action": "الاحداث",
+    "logout_success_toast": "تم تسجيل الخروج بنجاح.",
+  "Auth": {
+    "login": "تسجيل الدخول",
+    "welcome": "مرحبًا!",
+    "email_label": "البريد الإلكتروني",
+    "email_placeholder": "example@m.com",
+    "password_label": "كلمة المرور",
+    "forgot_password": "نسيت كلمة المرور؟",
+    "submit_button": "تسجيل الدخول",
+    "register_prompt": "ليس لديك حساب؟",
+    "register_link": "سجل الآن",
+    "name_label": "الاسم",
+    "name_placeholder": "الاسم",
+    "phone_label": "الهاتف",
+    "phone_placeholder": "0123456789",
+    "register_button": "تسجيل",
+    "continue_with": "أو تابع باستخدام",
+    "already_have_account": "هل لديك حساب بالفعل؟",
+    "login_link": "تسجيل الدخول",
+    "register_success_log": "تم التسجيل بنجاح",
+    "register_success_toast": "تم التسجيل بنجاح",
+    "register_error_toast": "فشل التسجيل",
+    "login_success_log": "تم تسجيل الدخول بنجاح",
+    "login_success_toast": "تم تسجيل الدخول بنجاح",
+    "login_error_log": "فشل تسجيل الدخول",
+    "login_error_toast": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+    "error_occurred": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
+    "email_not_found": "البريد الإلكتروني غير موجود",
+    "password_placeholder": "أدخل كلمة المرور الجديدة",
+    "confirm_password_label": "تأكيد كلمة المرور",
+    "confirm_password_placeholder": "أكد كلمة المرور الجديدة",
+    "logout_success_toast": "تم تسجيل الخروج بنجاح."
+  }
+
+
+}
