@@ -1,4 +1,3 @@
-// routing.ts
 import { useRouter as useNextRouter, usePathname as useNextPathname } from 'next/navigation';
 import NextLink from 'next/link';
 import { redirect as nextRedirect } from 'next/navigation';
