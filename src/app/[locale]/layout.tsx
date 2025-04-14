@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { Cairo } from "next/font/google";
-import Providers from "../../../components/providers";
+import Providers from "../../components/providers";
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "@/app/contexts/user-conetxt";
 
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { routing } from "../../../i18n/routing";
-import AuthWrapper from "../../../components/auth-wrapper";
+import { routing } from "../../i18n/routing";
+import AuthWrapper from "../../components/auth-wrapper";
 
 const cairo = Cairo({
   subsets: ["latin"],
