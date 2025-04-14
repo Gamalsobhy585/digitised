@@ -1,5 +1,5 @@
-import { getServerCookie } from "../../../../features/actions";
-import { redirect } from "../../../../i18n/routing";
+import { getServerCookie } from "../../../features/actions";
+import { redirect } from "../../../i18n/routing";
 import React from "react";
 
 const AuthLayout = async ({ children }: { children: React.ReactNode }) => {

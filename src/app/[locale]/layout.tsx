@@ -24,11 +24,15 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  const locale = params.locale;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
