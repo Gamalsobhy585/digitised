@@ -1,5 +1,5 @@
 import { ColumnDef,Row } from "@tanstack/react-table";
-import { statusMap, Task } from "./type";
+import {  Task } from "./type";
 import { Checkbox } from "../../components/ui/checkbox";
 import { Button } from "../../components/ui/button";
 import {  SquarePen, Eye, Trash2 } from "lucide-react";
@@ -62,24 +62,14 @@ export const getTaskColumns = (): ColumnDef<Task>[] => {
     },
  
     {
-      accessorKey: "status",
-      header: ({ column }) => (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className={`w-full `}
-        >
-          {("status")}
-        </Button>
-      ),
+      accessorKey: "status_display", 
+      header: "Status",
       cell: ({ row }) => {
-        const status = row.getValue("status") as string;
-        const statusText = statusMap[status as keyof typeof statusMap] || status;
-        const statusClass = status === "2" ? "text-green-600" : "text-yellow-600";
-        
+        const status = row.getValue("status_display");
+        const statusClass = status === "completed" ? "text-green-600" : "text-yellow-600";
         return (
-          <div className={`capitalize text-center"} ${statusClass}`}>
-            {(`${statusText}`)}
+          <div className={`capitalize ${statusClass}`}>
+            {status as string}
           </div>
         );
       },

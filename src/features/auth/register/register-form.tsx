@@ -170,9 +170,9 @@ export function RegisterForm({
                
                
                 <p className="text-center">
-                 Already Have an account
-                  <Link href="/login" className="text-primary underline">
-                    Login
+                 Already Have an account ? 
+                  <Link href="/login" className="text-primary ms-2 underline">
+                     Login
                   </Link>
                 </p>
               </div>

@@ -1,3 +1,4 @@
+"use client"
 import { TasksTable } from "../../../features/tasks/tasks-table";
 import {
   getTasks,
@@ -138,9 +139,9 @@ const Tasks = () => {
     <>
 
       <TasksTable
-        tasks={data?.data || []}
+        tasks={data && 'data' in data ? data.data : []}
         isLoading={isLoading}
-        error={isError ? error.message : null}
+        error={isError && error instanceof Error ? error.message : null}
         currentPage={currentPage}
         onPageChange={handlePageChange}
         searchQuery={searchQuery}

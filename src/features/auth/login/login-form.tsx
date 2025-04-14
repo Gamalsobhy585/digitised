@@ -48,21 +48,16 @@ export function LoginForm({
   const { mutate: login, isLoading } = useMutation({
     mutationFn: (data: z.infer<typeof loginSchema>) => loginApi(data),
     onSuccess: async (data) => {
-      // console.log(data.)
       toast.success("Login successful");
-      console.log(data);
       const user = data.data as User;
-
       localStorage.setItem("user", JSON.stringify(user));
-
-      // localStorage.setItem("token", user.token);
       await setServerCookie([
         { name: "token", value: user.token },
       ]);
       setIsAuthenticated(true);
-     
-        router.push("/");
       
+      // Redirect to tasks page
+      router.push("/tasks");
     },
     onError: (error) => {
       console.error("Login failed", error);

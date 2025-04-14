@@ -13,7 +13,7 @@ import {
   import { Input } from "../../components/ui/input";
   import { Button } from "../../components/ui/button";
   import { toast } from "react-toastify";
-  import { Task } from "./type";
+  import { statusDisplayMap, Task } from "./type";
   import { useEffect } from "react";
 import { Textarea } from "../../components/ui/textarea";
 
@@ -37,7 +37,7 @@ import { Textarea } from "../../components/ui/textarea";
         defaultValues: {
           title: initialData?.title || "",
           description: initialData?.description || "",
-          status: initialData?.status === 1 || initialData?.status === 2 ? initialData.status : 1,
+          status: (initialData?.status as 1 | 2) || 1,
           due_date: initialData?.due_date || "",
         },
       });
@@ -47,7 +47,7 @@ import { Textarea } from "../../components/ui/textarea";
           form.reset({
             title: initialData.title,
             description: initialData.description,
-            status: initialData.status,
+            status: initialData.status as 1 | 2, 
             due_date: initialData.due_date,
           });
         }
@@ -124,20 +124,22 @@ import { Textarea } from "../../components/ui/textarea";
           control={form.control}
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel className="w-full block">
-                Status
-              </FormLabel>
+              <FormLabel className="w-full block">Status</FormLabel>
               <FormControl>
-              <select
-              disabled={isViewMode}
-              value={field.value ?? ""}
-              onChange={(e) => field.onChange(Number(e.target.value))}
-              className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <option value="">Select status</option>
-              <option value="1">Pending</option>
-              <option value="2">Completed</option>
-            </select>
+                {isViewMode ? (
+                  <div className="p-2 border rounded-lg bg-gray-100">
+                    {statusDisplayMap[field.value as keyof typeof statusDisplayMap]}
+                  </div>
+                ) : (
+                  <select
+                    value={field.value ?? ""}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="1">Pending</option>
+                    <option value="2">Completed</option>
+                  </select>
+                )}
               </FormControl>
               <FormMessage />
             </FormItem>

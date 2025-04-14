@@ -77,6 +77,7 @@ async function fetchApi<T>(
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
+      "Accept-Language": "en",
       ...headers,
       ...(cookieHeader ? { Cookie: cookieHeader } : {}),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
