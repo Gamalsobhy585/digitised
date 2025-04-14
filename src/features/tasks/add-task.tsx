@@ -58,10 +58,15 @@ import { Textarea } from "../../components/ui/textarea";
 
       async function onSubmitHandler(values: z.infer<typeof taskSchema>) {
         try {
+          const payload = {
+            ...values,
+            status: (values.status === 1 ? 1 : 2) as 1 | 2, 
+          };
+      
           if (isEditMode && onSubmit) {
-            await onSubmit(values);
+            await onSubmit(payload);
           } else if (onAdd) {
-            await onAdd(values);
+            await onAdd(payload);
           }
           toast.success(`Task ${isEditMode ? 'updated' : 'added'} successfully`);
           if (!isEditMode) form.reset();
