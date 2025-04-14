@@ -7,9 +7,9 @@ import { User } from "./types";
 
 
 export async function login(data: z.infer<typeof loginSchema>) {
-  return api.post<ApiResponse<User>>("/auth/login", data);
+  return api.post<ApiResponse<User>>("/login", data);
 }
 
 export async function logout() {
-  return api.post<ApiResponse<null>>("/auth/logout");
+  return api.post<ApiResponse<null>>("/logout");
 }

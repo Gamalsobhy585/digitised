@@ -1,16 +1,16 @@
-import { TasksTable } from "../../../../features/tasks/tasks-table";
+import { TasksTable } from "../../../features/tasks/tasks-table";
 import {
   getTasks,
   deleteTask,
   createTask,
   getTask,
   updateTask,
-} from "../../../../features/tasks/api";
+} from "../../../features/tasks/api";
 import { useState } from "react";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { toast } from "react-toastify";
-import { UpdateTaskVariables } from "../../../../features/tasks/type";
-import { Task } from "../../../../features/tasks/type";
+import { UpdateTaskVariables } from "../../../features/tasks/type";
+import { Task } from "../../../features/tasks/type";
 
 
 const Tasks = () => {

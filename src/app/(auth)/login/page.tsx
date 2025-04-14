@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginForm } from "../../../../features/auth/login/login-form";
+import { LoginForm } from "../../../features/auth/login/login-form";
 import Image from "next/image";
 
 function Login() {

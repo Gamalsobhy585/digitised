@@ -1,4 +1,4 @@
-import { RegisterForm } from "../../../../features/auth/register/register-form";
+import { RegisterForm } from "../../../features/auth/register/register-form";
 import Image from "next/image";
 import React from "react";
 

@@ -1,9 +1,9 @@
 "use client";
 
-import Navbar from "../../../components/navbar";
+import Navbar from "../../components/navbar";
 import React, { useEffect } from "react";
-import { useRouter } from "../../../i18n/routing";
-import { useAuth } from "../../../context/AuthContext";
+import { useRouter } from "../../i18n/routing";
+import { useAuth } from "../../context/AuthContext";
 
 const UserLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();

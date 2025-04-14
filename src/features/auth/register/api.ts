@@ -5,7 +5,7 @@ import { ApiResponse } from "../../../lib/types";
 
 export async function register(data: z.infer<typeof registerSchema>) {
   try {
-    const res = await api.post<ApiResponse<null>>("/auth/register", data);
+    const res = await api.post<ApiResponse<null>>("/register", data);
     return res.message;
   } catch (error) {
     console.error(error);

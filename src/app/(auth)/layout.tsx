@@ -1,4 +1,4 @@
-import { getServerCookie } from "../../../features/actions";
+import { getServerCookie } from "../../features/actions";
 import { redirect } from "next/navigation"; 
 import React from "react";
 
