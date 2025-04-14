@@ -22,7 +22,6 @@ import {
 } from "../../../components/ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-// import { loginSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "react-query";
 import { register as registerApi } from "./api";
@@ -30,8 +29,6 @@ import { registerSchema } from "../schemas";
 import Link from "next/link";
 import { useRouter } from "../../../i18n/routing";
 import { toast } from "react-toastify";
-import { User } from "../login/types";
-import { setServerCookie } from "../../../features/actions";
 import { useAuth } from "../../../context/AuthContext";
 
 export function RegisterForm({
@@ -136,6 +133,27 @@ export function RegisterForm({
                             required
                             {...field}
                           />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <FormField
+                    name="password_confirmation"
+                    control={form.control}
+                    render={({ field }) => (
+                      <FormItem>
+                        <Label htmlFor="password">Password</Label>
+                        <FormControl>
+                        <Input
+                      id="password_confirmation"
+                      type="password"
+                      placeholder="Retype Password"
+                      autoComplete="new-password"
+                      {...field}
+                      />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
