@@ -4,11 +4,6 @@ import { Cairo } from "next/font/google";
 import Providers from "../../components/providers";
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "@/app/contexts/user-conetxt";
-
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { notFound } from "next/navigation";
-import { routing } from "../../i18n/routing";
 import AuthWrapper from "../../components/auth-wrapper";
 
 const cairo = Cairo({
@@ -18,28 +13,17 @@ const cairo = Cairo({
 
 export const metadata: Metadata = {
   title: "Digitised",
-  description:
-    "Digitised is a test assessment for digitised company.",
+  description: "Digitised is a test assessment for digitised company.",
 };
 
 export default async function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) {
-  const locale = params.locale;
-
   
-  if (!routing.locales.includes(locale as any)) {
-    notFound();
-  }
-
-  const messages = await getMessages();
-
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <html lang="en"> 
       <body className={`antialiased ${cairo.className}`}>
         <div className="App">
           <ToastContainer
@@ -56,13 +40,11 @@ export default async function RootLayout({
             }}
           />
         </div>
-        <NextIntlClientProvider messages={messages}>
-          <Providers>
-            <AuthWrapper>
-              <UserProvider>{children}</UserProvider>
-            </AuthWrapper>
-          </Providers>
-        </NextIntlClientProvider>
+        <Providers>
+          <AuthWrapper>
+            <UserProvider>{children}</UserProvider>
+          </AuthWrapper>
+        </Providers>
       </body>
     </html>
   );

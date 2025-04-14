@@ -27,9 +27,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "react-query";
 import { register as registerApi } from "./api";
 import { registerSchema } from "../schemas";
-import { Link, useRouter } from "../../../i18n/routing";
+import Link from "next/link";
+import { useRouter } from "../../../i18n/routing";
 import { toast } from "react-toastify";
-import { useTranslations } from "next-intl";
 import { User } from "../login/types";
 import { setServerCookie } from "../../../features/actions";
 import { useAuth } from "../../../context/AuthContext";
@@ -43,18 +43,17 @@ export function RegisterForm({
     resolver: zodResolver(registerSchema),
   });
 
-  const t = useTranslations("Auth");
   const { setIsAuthenticated } = useAuth();
   const { mutate: register, isLoading } = useMutation({
     mutationFn: (data: z.infer<typeof registerSchema>) => registerApi(data),
     onSuccess: () => {
       console.log("register success");
-      toast.success(t("register_success_toast"));
+      toast.success("Registration successful");
       router.push("/login");
     },
     onError: (error) => {
       console.error(error);
-      toast.error(t("register_error_toast"));
+      toast.error("Registration failed");
     },
   });
 
@@ -74,8 +73,8 @@ export function RegisterForm({
       <Card className="z-50 rounded-2xl">
         <CardHeader className="items-center">
           <Image src="/logo.png" alt="logo" width={100} height={100} />
-          <CardTitle className="text-2xl">{t("register_title")}</CardTitle>
-          <CardDescription>{t("register_description")}</CardDescription>
+          <CardTitle className="text-2xl">Registeration</CardTitle>
+          <CardDescription>Register Now</CardDescription>
         </CardHeader>
         <CardContent className="flex justify-center ">
           <Form {...form}>
@@ -87,11 +86,11 @@ export function RegisterForm({
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t("name_label")}</FormLabel>
+                        <FormLabel>Name</FormLabel>
                         <FormControl>
                           <Input
                             type="text"
-                            placeholder={t("name_placeholder")}
+                            placeholder="Name"
                             {...field}
                             required
                           />
@@ -107,11 +106,11 @@ export function RegisterForm({
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t("email_label")}</FormLabel>
+                        <FormLabel>Email</FormLabel>
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder={t("email_placeholder")}
+                            placeholder="Email"
                             {...field}
                             required
                           />
@@ -128,12 +127,12 @@ export function RegisterForm({
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <Label htmlFor="password">{t("password_label")}</Label>
+                        <Label htmlFor="password">Password</Label>
                         <FormControl>
                           <Input
                             id="password"
                             type="password"
-                            placeholder={t("pass_placeholder")}
+                            placeholder="Enter Your Password"
                             required
                             {...field}
                           />
@@ -148,14 +147,14 @@ export function RegisterForm({
                   className="w-full rounded-xl"
                   disabled={isLoading}
                 >
-                  {t("register_button")}
+                  Register
                 </Button>
                
                
                 <p className="text-center">
-                  {t("already_have_account")}{" "}
+                 Already Have an account
                   <Link href="/login" className="text-primary underline">
-                    {t("login_link")}
+                    Login
                   </Link>
                 </p>
               </div>

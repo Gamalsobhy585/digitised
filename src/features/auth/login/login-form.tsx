@@ -16,7 +16,8 @@ import { loginSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "react-query";
 import { login as loginApi } from "./api";
-import { Link, useRouter } from "../../../i18n/routing";
+import { useRouter } from "../../../i18n/routing";
+import Link from "next/link";
 import { toast } from "react-toastify";
 import { User } from "./types";
 import { setServerCookie } from "../../actions";
@@ -30,7 +31,6 @@ import {
 } from "../../../components/ui/card";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 
 export function LoginForm({
@@ -44,13 +44,12 @@ export function LoginForm({
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
   });
-  const t = useTranslations("Auth");
 
   const { mutate: login, isLoading } = useMutation({
     mutationFn: (data: z.infer<typeof loginSchema>) => loginApi(data),
     onSuccess: async (data) => {
       // console.log(data.)
-      toast.success(t("login_success_toast"));
+      toast.success("Login successful");
       console.log(data);
       const user = data.data as User;
 
@@ -67,7 +66,7 @@ export function LoginForm({
     },
     onError: (error) => {
       console.error("Login failed", error);
-      toast.error(t("login_error_toast"));
+      toast.error("Login failed. Please try again.");
     },
   });
 
@@ -86,8 +85,8 @@ export function LoginForm({
       <Card className="z-50 rounded-3xl py-6">
         <CardHeader className="items-center">
           <Image src="/logo.png" alt="logo" width={100} height={100} />
-          <CardTitle className="text-2xl">{t("login")}</CardTitle>
-          <CardDescription>{t("welcome")}</CardDescription>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>Welcome!</CardDescription>
         </CardHeader>
         <CardContent className="flex justify-center ">
           <Form {...form}>
@@ -99,11 +98,11 @@ export function LoginForm({
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t("email_label")}</FormLabel>
+                        <FormLabel>Email</FormLabel>
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder={t("email_placeholder")}
+                            placeholder={"example@m.com"}
                             {...field}
                             required
                           />
@@ -120,12 +119,12 @@ export function LoginForm({
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <Label htmlFor="password">{t("password_label")}</Label>
+                        <Label htmlFor="password">Password</Label>
                         <FormControl>
                           <Input
                             id="password"
                             type="password"
-                            placeholder={t("pass_placeholder")}
+                            placeholder={"Enter Your Password "}
 
                             required
                             {...field}
@@ -142,7 +141,7 @@ export function LoginForm({
                   className="w-full rounded-xl"
                   disabled={isLoading}
                 >
-                  {t("submit_button")}
+                 Login
                 </Button>
 
                
@@ -150,9 +149,9 @@ export function LoginForm({
                   
                    
                     <p className="text-center">
-                      {t("register_prompt")}{" "}
+                     Don't have an account?
                       <Link href="/register" className="text-primary underline">
-                        {t("register_link")}
+                        Register now
                       </Link>
                     </p>
                   </>
