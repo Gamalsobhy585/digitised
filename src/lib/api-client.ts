@@ -72,20 +72,35 @@ async function fetchApi<T>(
   const token = await getServerCookie("token");
   const fullUrl = buildUrlWithParams(`${env.API_URL}${url}`, params);
   
-  const response = await fetch(fullUrl, {
+  // Default headers
+  const defaultHeaders: Record<string, string> = {
+    Accept: "application/json",
+    "Accept-Language": "en",
+  };
+  
+  // Only add Content-Type for JSON requests, not for FormData
+  if (!(body instanceof FormData)) {
+    defaultHeaders["Content-Type"] = "application/json";
+  }
+  
+  // Add auth and cookies
+  if (cookieHeader) defaultHeaders.Cookie = cookieHeader;
+  if (token) defaultHeaders.Authorization = `Bearer ${token}`;
+  
+  // Prepare the request
+  const requestOptions: RequestInit = {
     method,
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      "Accept-Language": "en",
-      ...headers,
-      ...(cookieHeader ? { Cookie: cookieHeader } : {}),
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    body: body ? JSON.stringify(body) : undefined,
+    headers: { ...defaultHeaders, ...headers },
     cache,
     next,
-  });
+  };
+  
+  // Handle body based on its type
+  if (body) {
+    requestOptions.body = body instanceof FormData ? body : JSON.stringify(body);
+  }
+  
+  const response = await fetch(fullUrl, requestOptions);
   
   if (!response.ok) {
     const message = (await response.json()).message || response.statusText;

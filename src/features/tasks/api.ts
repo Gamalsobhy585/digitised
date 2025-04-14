@@ -82,20 +82,46 @@ export async function deleteTask(id: string) {
   }
 }
 
-
-export async function importFile()
-{
+export async function importFile(file: File): Promise<ApiResponse<any>> {
+  if (!file) {
+    return {
+      code: 400,
+      message: "No file provided",
+      status: "error"
+    };
+  }
+  
+  const validTypes = [
+    'text/csv',
+    'application/vnd.ms-excel', 
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  ];
+  
+  if (!validTypes.includes(file.type)) {
+    return {
+      code: 400,
+      message: "Invalid file type",
+      status: "error"
+    };
+  }
+  
   try {
-    const res = await api.post<ApiResponse<any>>(`/import`);
-    return res;
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    
+    // The updated api.post will now handle FormData correctly
+    const res = await api.post<ApiResponse<any>>('/tasks/import', formData);
+    return res.data;
+    
   } catch (error) {
-    return { 
-      success: false, 
-      error: error instanceof Error ? error.message : "An unknown error occurred" 
+    console.error('Upload error:', error);
+    return {
+      code: 500,
+      message: error instanceof Error ? error.message : "Upload failed",
+      status: "error"
     };
   }
 }
-
 
 export async function changeOrder()
 {
