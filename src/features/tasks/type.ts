@@ -5,7 +5,7 @@ export interface Task {
   id: string;
   title: string;
   description: string | null;
-  status: number; 
+  status: 1 | 2;
   status_display: "pending" | "completed"; 
   due_date: string | null;
 }

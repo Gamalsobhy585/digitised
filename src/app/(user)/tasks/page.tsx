@@ -69,14 +69,14 @@ const Tasks = () => {
   const showMutation = useMutation({
     mutationFn: getTask,
     onSuccess: (data) => {
-      setSelectedTask({
-        id: data.id,
-        title: data.title,
-        description: data.description,
-        status: data.status,
-        due_date: data.due_date,
-     
-      });
+    setSelectedTask({
+      id: data.id,
+      title: data.title,
+      description: data.description,
+      status: data.status,
+      status_display: data.status_display, 
+      due_date: data.due_date,
+    });
     },
     onError: (error) => {
       toast.error(`Error fetching task details ${error}`);

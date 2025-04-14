@@ -37,11 +37,12 @@ import { Textarea } from "../../components/ui/textarea";
         defaultValues: {
           title: initialData?.title || "",
           description: initialData?.description || "",
-          status: (initialData?.status as 1 | 2) || 1,
+          status: (initialData?.status === 1 || initialData?.status === 2) 
+            ? initialData.status 
+            : 1, 
           due_date: initialData?.due_date || "",
         },
       });
-
       useEffect(() => {
         if (initialData) {
           form.reset({
@@ -132,13 +133,13 @@ import { Textarea } from "../../components/ui/textarea";
                   </div>
                 ) : (
                   <select
-                    value={field.value ?? ""}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
-                    className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="1">Pending</option>
-                    <option value="2">Completed</option>
-                  </select>
+                  value={field.value ?? ""}
+                  onChange={(e) => field.onChange(parseInt(e.target.value))} // Use parseInt
+                  className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="1">Pending</option>
+                  <option value="2">Completed</option>
+                </select>
                 )}
               </FormControl>
               <FormMessage />
