@@ -1,8 +1,7 @@
 import { ColumnDef,Row } from "@tanstack/react-table";
 import {  Task } from "./type";
-import { Checkbox } from "../../components/ui/checkbox";
 import { Button } from "../../components/ui/button";
-import {  SquarePen, Eye, Trash2 } from "lucide-react";
+import {  SquarePen, Eye, Trash2, GripVertical } from "lucide-react";
 
 
 
@@ -11,28 +10,9 @@ export const getTaskColumns = (): ColumnDef<Task>[] => {
 
   return [
     {
-      id: "select",
-      header: ({ table }) => (
-        <Checkbox
-          className="mx-2"
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label={("select all")}
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          className="mx-2"
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label={("select row")}
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
+      id: 'drag-handle',
+      cell: () => <GripVertical className="h-4 w-4" />,
+      size: 40,
     },
     {
       accessorKey: "id",

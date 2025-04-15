@@ -122,8 +122,15 @@ export async function importFile(file: File): Promise<ApiResponse<any>> {
     };
   }
 }
-
-export async function changeOrder()
-{
-  
+export async function changeOrder(firstTaskId: number, secondTaskId: number): Promise<ApiResponse<any>> {
+  try {
+    const response = await api.post<ApiResponse<any>>('/tasks/priority/change', {
+      first_task_id: firstTaskId,
+      second_task_id: secondTaskId
+    });
+    return response;
+  } catch (error) {
+    console.error("Error reordering tasks:", error);
+    throw error;
+  }
 }

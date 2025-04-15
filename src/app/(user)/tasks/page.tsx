@@ -24,7 +24,6 @@ import { ApiResponse } from "@/lib/types";
 
 const Tasks = () => {
 
-  // import
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
       'text/csv': ['.csv'],
@@ -42,10 +41,6 @@ const Tasks = () => {
       toast.error("Please upload only CSV or Excel files");
     }
   });
-  
-
-
-
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("");
@@ -53,10 +48,8 @@ const Tasks = () => {
     null
   );
   const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
-
-
   const queryClient = useQueryClient();
-  const { data, isLoading, isError, error } = useQuery({
+  const { data: tasks, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["tasks", currentPage, searchQuery, filter],
     queryFn: () =>
       getTasks({
@@ -73,11 +66,6 @@ const Tasks = () => {
       default: return "";
     }
   };
-
-
-
-
-// import
 
 const importMutation = useMutation<ApiResponse<any>, Error, File>({
   mutationFn: importFile,
@@ -113,14 +101,8 @@ const handleImportFile = (e: ChangeEvent<HTMLInputElement> | { target: { files: 
   importMutation.mutate(file);
 };
 
-
-
-        
-
-
   const handleFilterChange = (filterValue: string) => {
-    let apiFilterValue = "";
-    
+    let apiFilterValue = ""; 
     if (filterValue === "pending") {
       apiFilterValue = "pending";
     } else if (filterValue === "completed") {
@@ -128,14 +110,10 @@ const handleImportFile = (e: ChangeEvent<HTMLInputElement> | { target: { files: 
     } else if (filterValue === "all") {
       apiFilterValue = ""; 
     }
-    
     setFilter(filterValue); 
     setCurrentPage(1);
-    
-
   };
 
-  
 
   const showMutation = useMutation({
     mutationFn: getTask,
@@ -269,7 +247,7 @@ const handleImportFile = (e: ChangeEvent<HTMLInputElement> | { target: { files: 
           </div>
 
       <TasksTable
-        tasks={data && 'data' in data ? data.data : []}
+        tasks={tasks && 'data' in tasks ? tasks.data : []}
         isLoading={isLoading}
         error={isError && error instanceof Error ? error.message : null}
         currentPage={currentPage}
@@ -284,6 +262,7 @@ const handleImportFile = (e: ChangeEvent<HTMLInputElement> | { target: { files: 
         onUpdate={(params) => updateMutation.mutate(params)}
         selectedTask={selectedTask}
         setSelectedTask={setSelectedTask}
+        onReorderSuccess={refetch}
       />
     </>
   );
