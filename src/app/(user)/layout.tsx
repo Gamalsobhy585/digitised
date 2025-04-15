@@ -1,25 +1,27 @@
+// app/(user)/layout.tsx
 "use client";
 
-import Navbar from "../../components/navbar";
-import React, { useEffect } from "react";
-import { useRouter } from "../../i18n/routing";
-import { useAuth } from "../../context/AuthContext";
+import Navbar from "@/components/navbar";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "@/i18n/routing";
+import { useEffect } from "react";
 
-const UserLayout = ({ children }: { children: React.ReactNode }) => {
+export default function UserLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
-    if (isAuthenticated ) {
-      router.push("/");
+    if (!isLoading && !isAuthenticated) {
+      router.push("/login");
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, isLoading, router]);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-    </>
+      <main className="flex-1 container mx-auto px-4 py-6">
+        {children}
+      </main>
+    </div>
   );
-};
-
-export default UserLayout;
+}

@@ -1,5 +1,5 @@
-import Tasks from "./(user)/tasks/page";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <Tasks />;
+  redirect('/tasks'); 
 }

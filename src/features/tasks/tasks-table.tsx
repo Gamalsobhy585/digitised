@@ -371,23 +371,26 @@ export function TasksTable({
         </DndContext>
       </div>
     
-      <div className="flex fixed right-[4%] bottom-[2%] items-center justify-end space-x-2 py-4">
+      <div className="sticky bottom-0 bg-background py-4 border-t flex justify-end">
+      <div className="flex items-center gap-2">
         <Button
           variant="outline"
           size="sm"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
-          previous
+          Previous
         </Button>
         <Button
           variant="outline"
           size="sm"
           onClick={() => onPageChange(currentPage + 1)}
+          disabled={!tasks || tasks.length === 0}
         >
           Next
         </Button>
       </div>
+    </div>
     </div>
   );
 }
